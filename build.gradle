@@ -1,0 +1,109 @@
+group 'com.drmeph'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+//path variables used for liquibase
+def releasePath = "$projectDir/src/main/resources/db/changelog/release"
+def changelogPath = "$projectDir/src/main/resources/db/changelog"
+def changelogPrefix = "db.changelog-"
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile 'org.springframework:spring-webmvc:4.3.3.RELEASE',
+            'org.springframework:spring-aop:4.3.3.RELEASE',
+            'org.springframework:spring-jdbc:4.3.3.RELEASE',
+            'com.fasterxml.jackson.core:jackson-core:2.8.3',
+            'com.fasterxml.jackson.core:jackson-annotations:2.8.3',
+            'com.fasterxml.jackson.core:jackson-databind:2.8.3',
+            'log4j:log4j:1.2.15@jar'
+
+    providedCompile 'org.apache.tomcat:tomcat-dbcp:9.0.0.M1',
+            'org.apache.tomcat:servlet-api:6.0.45'
+
+    testCompile 'junit:junit:4.12',
+            'org.springframework:spring-test:4.3.3.RELEASE',
+            'org.springframework:spring-context:4.3.3.RELEASE',
+            'org.mockito:mockito-all:1.9.5'
+}
+
+//This task clear
+task clearChangelogFiles(type: org.gradle.api.tasks.Delete) {
+    delete fileTree(dir: changelogPath, include: '*.json')
+}
+
+task generateLiquibaseChangeLog(dependsOn: clearChangelogFiles) {
+
+    doLast {
+
+        def releaseDirectory = new File(releasePath)
+
+        FileCollection releaseCollection = files { releaseDirectory.listFiles() }
+
+        releaseCollection.each {
+            File dirFile ->
+                println dirFile.name + ": "
+
+                if (dirFile.isDirectory()) {
+                    FileCollection scriptCollection = files { dirFile.listFiles() }
+
+                    def changelogContent = ""
+
+                    scriptCollection.each {
+                        File scriptFile ->
+                            println scriptFile.name
+                            if (!changelogContent.isEmpty()) {
+                                changelogContent += ",\n"
+                            }
+
+                            changelogContent += "{\n\"include\": {\n\"file\": \"" +"release/"+dirFile.name+ "/"+scriptFile.name +"\"\n}\n}"
+                    }
+                    def changelogFile = file(changelogPath +"/"+changelogPrefix+dirFile.name+".json")
+                    changelogFile << "{\n\"databaseChangeLog\": [\n" + changelogContent + "\n]\n}"
+                }
+        }
+    }
+}
+
+//This task generate the master changelog based on all the changelog scripts in the release folder
+task generateLiquibaseMasterChangelog(dependsOn: generateLiquibaseChangeLog){
+    doLast {
+        org.gradle.api.file.FileTree tree = fileTree(changelogPath).include("*.json")
+        def masterFileContent = ""
+
+        tree.each { File file ->
+
+            if (!masterFileContent.isEmpty()) {
+                masterFileContent += ",\n"
+            }
+            masterFileContent += "{\n\"include\": {\n\"file\": \"" +file.name +"\"\n}\n}"
+        }
+
+        def masterChangelogFile = file(changelogPath+"/db.changelog-master.json")
+        masterChangelogFile << "{\n\"databaseChangeLog\": [\n" + masterFileContent + "\n]\n}"
+    }
+}
+
+//This task is using liquibase to update to the latest database version
+task updatedatabase(type: org.gradle.api.tasks.JavaExec, dependsOn: generateLiquibaseMasterChangelog) {
+    main = "-jar"
+    workingDir = 'src/main/resources/db/changelog/'
+    args relativePath("liquibase.jar")
+    args "--logLevel=info"
+    args "update"
+}
+
+/*
+This is to be used only if really needed. It is clearing the checksum from the changelog
+in order to apply modification to a changeset
+ */
+task clearLiquibaseChecksum(type: org.gradle.api.tasks.JavaExec) {
+    main = "-jar"
+    workingDir = 'src/main/resources/db/changelog/'
+    args relativePath("liquibase.jar")
+    args "--logLevel=info"
+    args "clearCheckSums"
+}
