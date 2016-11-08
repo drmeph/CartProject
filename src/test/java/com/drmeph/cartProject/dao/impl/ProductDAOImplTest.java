@@ -1,6 +1,6 @@
 package com.drmeph.cartProject.dao.impl;
 
-import com.drmeph.cartProject.configuration.TestConfiguration;
+import com.drmeph.cartProject.configuration.TestProductConfiguration;
 import com.drmeph.cartProject.exception.DAOException;
 import com.drmeph.cartProject.entity.Product;
 import org.junit.After;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
  * Created by kdorfer on 2016-11-06.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfiguration.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = TestProductConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class ProductDAOImplTest {
 
     @Autowired

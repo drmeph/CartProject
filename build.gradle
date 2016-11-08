@@ -27,12 +27,15 @@ dependencies {
             'log4j:log4j:1.2.15@jar'
 
     providedCompile 'org.apache.tomcat:tomcat-dbcp:9.0.0.M1',
-            'org.apache.tomcat:servlet-api:6.0.45'
+            'org.apache.tomcat:servlet-api:6.0.45',
+            'javax.servlet:javax.servlet-api:3.0.1'
 
     testCompile 'junit:junit:4.12',
             'org.springframework:spring-test:4.3.3.RELEASE',
             'org.springframework:spring-context:4.3.3.RELEASE',
             'org.mockito:mockito-all:1.9.5'
+
+
 }
 
 //This task clear
