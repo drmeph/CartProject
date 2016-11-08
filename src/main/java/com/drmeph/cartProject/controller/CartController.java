@@ -3,13 +3,14 @@ package com.drmeph.cartProject.controller;
 import com.drmeph.cartProject.enums.ResultCode;
 import com.drmeph.cartProject.exception.DAOException;
 import com.drmeph.cartProject.model.response.CartResponseModel;
+import com.drmeph.cartProject.model.response.ResponseModel;
 import com.drmeph.cartProject.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.*;
+
 
 /**
  * Created by kdorfer on 2016-11-07.
@@ -62,5 +63,23 @@ public class CartController extends BaseController {
         }
 
         return responseModel;
+    }
+
+    /*
+     * Other section
+     */
+    /**
+     * Handles missing parameter requests
+     *
+     * @param exception
+     * @return
+     */
+    //TODO attempt to handle missing parameters but it's not working for now.
+    @ResponseBody
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ResponseModel> missingParameters(Exception exception) {
+        ResponseModel responseModel = new ResponseModel();
+        responseModel.setMessage("You are missing a parameter");
+        return ResponseEntity.ok(responseModel);
     }
 }
