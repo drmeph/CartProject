@@ -11,8 +11,18 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <mvc:annotation-driven/>
-    <context:component-scan base-package="com.stepfighterz.restAPI.controller"/>
-    <context:component-scan base-package="com.stepfighterz.restAPI.service"/>
-    <context:component-scan base-package="com.stepfighterz.restAPI.dao"/>
-    <context:component-scan base-package="com.stepfighterz.restAPI.configuration"/>
+    <context:component-scan base-package="com.drmeph.cartProject.controller"/>
+    <context:component-scan base-package="com.drmeph.cartProject.service"/>
+    <context:component-scan base-package="com.drmeph.cartProject.dao"/>
+    <context:component-scan base-package="com.drmeph.cartProject.configuration"/>
+
+
+    <context:property-placeholder location="classpath:db/changelog/liquibase.properties"/>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>i18n.localization</value>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
 </beans>
