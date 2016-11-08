@@ -75,6 +75,15 @@ public class CartServiceImpl implements CartService, Serializable {
     }
 
     /**
+     * Method for resetting the cart (testing purpose)
+     *
+     * @param cart
+     */
+    void setCart(HashMap<Integer, Integer> cart) {
+        this.cart = cart;
+    }
+
+    /**
      *
      * @param productId
      */

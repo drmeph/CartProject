@@ -1,6 +1,8 @@
 package com.drmeph.cartProject.configuration;
 
+import com.drmeph.cartProject.dao.impl.ProductDAOImpl;
 import com.drmeph.cartProject.dao.impl.RatingDAOImpl;
+import com.drmeph.cartProject.service.impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +15,17 @@ import static org.mockito.Mockito.mock;
  * Created by kdorfer on 2016-11-08.
  */
 @Configuration
-public class TestRatingConfiguration {
+public class TestCartServiceConfiguration {
 
     @Bean
-    @Qualifier(value = "testRatingDAO")
-    RatingDAOImpl getRatingDAO() {
-        return new RatingDAOImpl();
+    @Qualifier("testCartService")
+    CartServiceImpl getCartService() {
+        return new CartServiceImpl();
+    }
+
+    @Bean(value = "productDAO")
+    ProductDAOImpl getProductDAO() {
+        return mock(ProductDAOImpl.class);
     }
 
     @Bean
@@ -31,4 +38,9 @@ public class TestRatingConfiguration {
         return mock(MessageSource.class);
     }
 
+    @Bean
+    @Qualifier(value = "testRatingDAO")
+    public RatingDAOImpl getTestRatingDAO() {
+        return new RatingDAOImpl();
+    }
 }
