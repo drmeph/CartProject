@@ -63,12 +63,22 @@ public class CartControllerTest {
         mvc = null;
     }
 
+    /**
+     * Test that a request to add-to-cart return 200
+     *
+     * @throws Exception
+     */
     @Test
     public void addToCart() throws Exception {
         mvc.perform(post(ADD_TO_CART_URL).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test that a request to add-to-cart return 200 even if a DAOException is raised
+     *
+     * @throws Exception
+     */
     @Test
     public void addToCartWithDAOException() throws Exception {
         doThrow(DAOException.class).when(cartService).addToCart(anyInt());
@@ -76,12 +86,20 @@ public class CartControllerTest {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test that a request to remove-from-cart return 200
+     * @throws Exception
+     */
     @Test
     public void removeFromCart() throws Exception {
         mvc.perform(post(REMOVE_FROM_CART_URL).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test that a request to remove-from-cart return 200 even if a DAOException is raised
+     * @throws Exception
+     */
     @Test
     public void removeFromCartWithDAOException() throws Exception {
         doThrow(DAOException.class).when(cartService).addToCart(anyInt());
