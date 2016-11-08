@@ -22,8 +22,9 @@ public class CartController extends BaseController {
     CartService cartService;
 
     /**
+     * Handle adding a product to a cart based on the browser session
      *
-     * @param productId
+     * @param productId the id of the product that needs to be added to the cart
      * @return
      */
     @RequestMapping(value = "add-to-cart", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,8 +43,9 @@ public class CartController extends BaseController {
     }
 
     /**
+     * Handle removing a product from a cart based on the browser session
      *
-     * @param productId
+     * @param productId the id of the product that needs to be removed from the cart
      * @return
      */
     @RequestMapping(value = "remove-from-cart", method = RequestMethod.POST,
