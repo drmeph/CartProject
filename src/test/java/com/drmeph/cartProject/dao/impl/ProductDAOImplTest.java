@@ -3,6 +3,7 @@ package com.drmeph.cartProject.dao.impl;
 import com.drmeph.cartProject.configuration.TestProductConfiguration;
 import com.drmeph.cartProject.exception.DAOException;
 import com.drmeph.cartProject.entity.Product;
+import com.drmeph.cartProject.exception.MyDataAccessException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -103,12 +104,5 @@ public class ProductDAOImplTest {
         doThrow(new MyDataAccessException("KO")).when(jdbcTemplate).update(anyString(), anyInt());
 
         testProductDAO.deleteProduct(1);
-    }
-
-    private class MyDataAccessException extends DataAccessException {
-
-        public MyDataAccessException(String msg) {
-            super(msg);
-        }
     }
 }

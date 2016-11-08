@@ -25,6 +25,7 @@ public class RatingDAOImpl implements RatingDAO {
     MessageSource messageSource;
 
     /**
+     * Method that add a rating record to Rating table for a given productId
      *
      * @param productId
      * @param rating

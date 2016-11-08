@@ -102,7 +102,7 @@ public class CatalogControllerTest {
 
     /**
      * Test that a request to show-product return 200 even if a DAOException is raised
-     * 
+     *
      * @throws Exception
      */
     @Test
