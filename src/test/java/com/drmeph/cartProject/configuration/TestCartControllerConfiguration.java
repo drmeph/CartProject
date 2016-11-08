@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
  * Created by kdorfer on 2016-11-07.
  */
 @Configuration
-public class TestCartConfiguration {
+public class TestCartControllerConfiguration {
 
     @Bean(value = "cartService")
     CartServiceImpl getCartService() {

@@ -1,6 +1,8 @@
 package com.drmeph.cartProject.enums;
 
 /**
+ * Set of request result code
+ *
  * Created by kdorfer on 2016-11-07.
  */
 public enum ResultCode {

@@ -1,6 +1,6 @@
 package com.drmeph.cartProject.controller;
 
-import com.drmeph.cartProject.configuration.TestCartConfiguration;
+import com.drmeph.cartProject.configuration.TestCartControllerConfiguration;
 import com.drmeph.cartProject.exception.DAOException;
 import com.drmeph.cartProject.service.impl.CartServiceImpl;
 import org.junit.After;
@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by kdorfer on 2016-11-07.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestCartConfiguration.class, loader = AnnotationConfigWebContextLoader.class)
+@ContextConfiguration(classes = TestCartControllerConfiguration.class, loader = AnnotationConfigWebContextLoader.class)
 @WebAppConfiguration
 public class CartControllerTest {
     private static final String ADD_TO_CART_URL = "/cart/add-to-cart?productId=1";
@@ -66,7 +66,7 @@ public class CartControllerTest {
     @Test
     public void addToCart() throws Exception {
         mvc.perform(post(ADD_TO_CART_URL).contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk()).andReturn();
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -79,13 +79,13 @@ public class CartControllerTest {
     @Test
     public void removeFromCart() throws Exception {
         mvc.perform(post(REMOVE_FROM_CART_URL).contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk()).andReturn();
+                .andExpect(status().isOk());
     }
 
     @Test
     public void removeFromCartWithDAOException() throws Exception {
         doThrow(DAOException.class).when(cartService).addToCart(anyInt());
         mvc.perform(post(REMOVE_FROM_CART_URL).contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk()).andReturn();
+                .andExpect(status().isOk());
     }
 }
