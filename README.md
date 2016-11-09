@@ -6,9 +6,19 @@ The project is implemented using Spring MVC, Spring Security, JDBC, MySQL, Tomca
 
 ## Getting Started
 ### Prerequisites
-> Java 8 Development Kit (JDK 8).
-> Gradle 3.1.
-> Tomcat 9 (just because :P).
+* Java 8 Development Kit (JDK 8).
+* Gradle 3.1.
+* Tomcat 9 (just because :P).
+* MySQL
+
+### Installation
+1. intall java + gradle, they must be in the PATH
+2. Create a "cartproject" database in mysql
+3. Create a "cpadmin" user in mysql and grant it access to "cartproject" database
+4. At the root of the project run "gradle updatedatabase", it will initialise the database
+5. At the root of the project run "gradle build", it will create the war file in the build folder
+6. Place that war file in your tomcat's webapps folder
+7. Run tomcat et voila!
 
 ## Key Features
 ### Customers and Admins
