@@ -25,5 +25,12 @@ A user can display the list of products available in store by requesting the
 * Admins: /admin/catalog/list-products
   * will display the full list of product in the catalog with their name and the quantity in stock
   
-### Display Product: 
-A user can display the details of a product 
+### Display Product: /catalog/show-product/[productiId]
+A customer can display the details of a product (name, rating, in stock and price).  
+
+### Rate product: /catalog/rate-product
+A customer can rate a product on a scale of 1 - 10
+
+### Add/Remove product to cart
+A customer can add or remove a product to the cart, this will lock the product from the inventory.
+[LIMITATION] the api does not handle session timeout and by extension doesn't release the locked resource automatically, it needs to be done manually.
