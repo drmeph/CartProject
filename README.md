@@ -41,9 +41,12 @@ A customer can display the details of a product (name, rating, in stock and pric
 ### Rate product: /catalog/rate-product
 A customer can rate a product on a scale of 1 - 10
 
-### Add/Remove product to cart
+### Add/Remove product to cart: /cart/add-to-cart - /cart/remove-from-cart
 A customer can add or remove a product to the cart, this will lock the product from the inventory.
 [LIMITATION] the api does not handle session timeout and by extension doesn't release the locked resource automatically, it needs to be done manually.
+
+### Add / Remove product from catalog:
+A admin can add or remove product from the catalog, must login before using this request - READ MORE [Add Product](https://github.com/drmeph/CartProject/wiki/add-product) - [Remove Product](https://github.com/drmeph/CartProject/wiki/Remove-Product)
 
 ## Limitations and possible improvements
 ### Anonymous users
