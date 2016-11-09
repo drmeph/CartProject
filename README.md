@@ -11,9 +11,19 @@ The project is implemented using Spring MVC, Spring Security, JDBC, MySQL, Tomca
 > Tomcat 9 (just because :P).
 
 ## Key Features
-### customers and admins
+### Customers and Admins
 2 types of users can access the api:
 * Customers: unauthenticated users that can access only a subset of the api features. Public requests
 * Admins: authentificated users and have access to the entire set of the api features. To login : 
 
 > curl -i -X POST -d username=admin -d password=admin -c /tmp/cookies.txt http://[hostname]:[port]/login
+
+### Products List:
+A user can display the list of products available in store by requesting the 
+* Customers: /catalog/list-products
+  * will display the full list of product in the catalog with their name and identifiers
+* Admins: /admin/catalog/list-products
+  * will display the full list of product in the catalog with their name and the quantity in stock
+  
+### Display Product: 
+A user can display the details of a product 
