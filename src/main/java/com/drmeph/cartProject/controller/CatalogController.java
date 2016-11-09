@@ -173,9 +173,4 @@ public class CatalogController extends BaseController {
 
         return responseModel;
     }
-
-    /*
-     * Other section
-     */
-
 }
