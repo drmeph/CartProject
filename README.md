@@ -34,3 +34,19 @@ A customer can rate a product on a scale of 1 - 10
 ### Add/Remove product to cart
 A customer can add or remove a product to the cart, this will lock the product from the inventory.
 [LIMITATION] the api does not handle session timeout and by extension doesn't release the locked resource automatically, it needs to be done manually.
+
+## Limitations and possible improvements
+### Anonymous users
+Customers are anonymous users, no users are created, or need to be created for customers.
+
+### No session timeout
+Customers when requesting the back-end receive a jsessionid that the client can reuse to keep working with its cart. A possible improvement would be to add timeouts, that way when the session times out it will unlock the resource automatically.
+
+### No Paging
+When requesting the list of products, the full list is sent, which can become pretty big and slow down the response. A possible improvement is to implement paging, limiting each page to 25 to 50 records.
+
+### No unique rate
+Rating are done anonymously, which means that customers can send as many as they want. A possible improvement could be to map the jsessionid with the rating record, to ask them to add a piece of information (eg. email) or introduce a new role for authentificated customers. Customers that are authentified would be the only ones able to rate a product.
+
+### No logout
+For now logout isn't implemented.
