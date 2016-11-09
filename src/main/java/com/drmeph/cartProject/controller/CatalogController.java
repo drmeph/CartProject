@@ -33,8 +33,10 @@ public class CatalogController extends BaseController {
      */
 
     /**
+     * Handle pulling the list of products in the catalog
      *
-     * @return
+     * @return a json response containing :
+     * message, ResultCode, product list of names and ids
      */
     @RequestMapping(value = "catalog/list-products", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,9 +55,11 @@ public class CatalogController extends BaseController {
     }
 
     /**
+     * Handle pulling a product record given a productId
      *
      * @param productId
-     * @return
+     * @return a json response containing :
+     * message, ResultCode, product name, id, price, rating, inStock
      */
     @RequestMapping(value = "catalog/show-product/{productId}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -73,10 +77,11 @@ public class CatalogController extends BaseController {
     }
 
     /**
+     * Handle the rating request for any users Customer or Administrator
      *
-     * @param ratingModel
-     * @param errors
-     * @return
+     * @param ratingModel json object containing productId and rating value (1 - 10)
+     * @param errors contains all the validation errors
+     * @return a json model contains the result message and code
      */
     @RequestMapping(value = "catalog/rate-product", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -107,6 +112,7 @@ public class CatalogController extends BaseController {
      */
 
     /**
+     * Handle adding a product to the catalog
      *
      * @param model
      * @param errors
@@ -135,6 +141,7 @@ public class CatalogController extends BaseController {
     }
 
     /**
+     * handle removing a product from the catalog
      *
      * @param productId
      * @return
@@ -156,6 +163,7 @@ public class CatalogController extends BaseController {
     }
 
     /**
+     * Handle pulling the list of products for a Administrator
      *
      * @return
      */
