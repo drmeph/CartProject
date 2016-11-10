@@ -24,22 +24,16 @@ The project is implemented using Spring MVC, Spring Security, JDBC, MySQL, Tomca
 ### Customers and Admins
 2 types of users can access the api:
 * Customers: unauthenticated users that can access only a subset of the api features. Public requests
-* Admins: authentificated users and have access to the entire set of the api features. To login : 
+* Admins: authentificated users and have access to the entire set of the api features. [READ MORE](https://github.com/drmeph/CartProject/wiki/Login)
 
-> curl -i -X POST -d username=admin -d password=admin -c /tmp/cookies.txt http://[hostname]:[port]/login
-
-### Products List:
-A user can display the list of products available in store by requesting the 
-* Customers: /catalog/list-products
-  * will display the full list of product in the catalog with their name and identifiers
-* Admins: /admin/catalog/list-products
-  * will display the full list of product in the catalog with their name and the quantity in stock
+### List Products:
+A user can display the list of products available in store [READ MORE](https://github.com/drmeph/CartProject/wiki/List-Products)
   
-### Display Product: /catalog/show-product/[productiId]
-A customer can display the details of a product (name, rating, in stock and price).  
+### Show Product
+A customer can display the details of a product (name, rating, in stock and price). [READ MORE](https://github.com/drmeph/CartProject/wiki/Show-Product)  
 
-### Rate product: /catalog/rate-product
-A customer can rate a product on a scale of 1 - 10
+### Rate product:
+A customer can rate a product on a scale of 1 - 10 [READ MORE](https://github.com/drmeph/CartProject/wiki/Rate-Product)
 
 ### Add/Remove product to cart: /cart/add-to-cart - /cart/remove-from-cart
 A customer can add or remove a product to the cart, this will lock the product from the inventory.
